@@ -24,7 +24,7 @@ const conn = mysql.createConnection({
 const transportobj = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'b23ai121@kitsw.ac.in',
+        user: '',
         pass: 'rgyn ynjp vmwj vkpa'
     }
 });
@@ -50,7 +50,7 @@ app.post("/register", async (req, res) => {
         conn.query(sql, [full_name, phone, email, joindate, course, hashedPassword, confirm], (err) => {
             if (err) return res.status(500).send('Error occurred while registering');
             transportobj.sendMail({
-                from: "b23ai121@kitsw.ac.in",
+                from: "",
                 to: email,
                 subject: "Registration Successful",
                 text: `Hey ${full_name}, your SMDB registration was successful!`
@@ -74,7 +74,7 @@ app.post("/login", (req, res) => {
         if (!isPasswordValid) return res.status(401).send("Invalid email or password");
 
         transportobj.sendMail({
-            from: "b23ai121@kitsw.ac.in",
+            from: "",
             to: email,
             subject: "Login Detected",
             text: `Hey ${user.full_name}, a new login was detected in your SMDB account.`
